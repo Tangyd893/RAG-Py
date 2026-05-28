@@ -104,3 +104,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 4: P0-4 RAG查询链路实现
+
+**Date**: 2026-05-28
+**Task**: P0-4 RAG查询链路实现
+**Branch**: `master`
+
+### Summary
+
+实现完整RAG流水线：向量检索/上下文构建/MiMo LLM生成/结果持久化/来源引用
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `ba98313` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
