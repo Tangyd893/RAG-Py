@@ -71,3 +71,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 3: P0-3 索引流水线实现
+
+**Date**: 2026-05-28
+**Task**: P0-3 索引流水线实现
+**Branch**: `master`
+
+### Summary
+
+实现Celery异步索引任务：解析器/切分器/BGE-Chroma向量化/IngestionService五阶段编排/幂等重试
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `bdb4697` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
