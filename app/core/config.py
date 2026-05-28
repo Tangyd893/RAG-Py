@@ -36,6 +36,10 @@ class Settings(BaseSettings):
     bge_model_name: str = "BAAI/bge-m3"
     bge_device: str = "cpu"
 
+    # 重排序
+    reranker_model_name: str = "BAAI/bge-reranker-v2-m3"
+    reranker_device: str = "cpu"
+
     # LLM
     llm_provider: str = "mimo"
     mimo_base_url: str = ""

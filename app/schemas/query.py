@@ -10,6 +10,8 @@ class QueryRequest(BaseModel):
     question: str
     top_k: int = 5
     temperature: float = 0.2
+    rerank_enabled: bool = False
+    hybrid_search: bool = False
 
 
 class SourceResponse(BaseModel):

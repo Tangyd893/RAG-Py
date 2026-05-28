@@ -2101,6 +2101,32 @@ class IndexDocumentCommand(BaseModel):
 | P1 | 质量保障 | 测试、日志、错误码、README | E2E 可复现，request_id 全链路可追踪 |
 | P2 | 检索优化 | 混合检索、重排、评测集 | Recall/MRR 有基线与对比结果 |
 
+#### P2 实施记录（2026-05-28）
+
+##### 混合检索（Hybrid Search）
+
+- **Dense 检索**：沿用 BGE-M3 向量检索（`RetrievalService`）
+- **Sparse 检索**：新增纯 Python BM25 实现（`app/infrastructure/retrieval/bm25.py`），无需外部依赖
+  - 内置中文分词支持（正则匹配 CJK 字符）
+  - 按知识库级缓存索引（`BM25IndexCache`）
+- **融合策略**：Reciprocal Rank Fusion (RRF, k=60)
+  - `HybridRetrievalService` 位于 `app/application/services/hybrid_retrieval_service.py`
+
+##### 重排（Reranking）
+
+- 模型：`BAAI/bge-reranker-v2-m3`（Cross-Encoder）
+- 适配器：`app/infrastructure/providers/reranker/bge_reranker.py`
+- 配置项：`RERANKER_MODEL_NAME`、`RERANKER_DEVICE`（`app/core/config.py`）
+- 查询接口：`QueryRequest.rerank_enabled` 控制是否启用
+
+##### 评测集（Evaluation）
+
+- 评测框架：`tests/eval/`
+  - `metrics.py`：Recall@k、MRR、NDCG@k
+  - `dataset.py`：`EvalQuery` / `EvalDataset` 数据结构 + 内置示例集
+  - `runner.py`：多检索模式对比评测（本地 mock / 远程 API）
+- 评测命令：`python tests/eval/runner.py [--remote URL] [--kb-id UUID]`
+
 ### 23.3 Web UI 框架调研建议
 
 优先搜索并评估以下方向（用于快速搭建管理台）：

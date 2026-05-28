@@ -2,6 +2,7 @@
 
 import time
 import uuid
+from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -24,11 +25,15 @@ class RagService:
         kb_service: KnowledgeBaseService,
         retrieval: RetrievalService,
         llm: LLMProvider,
+        hybrid_retrieval: Optional[object] = None,
+        reranker: Optional[object] = None,
     ):
         self.session = session
         self.kb_service = kb_service
         self.retrieval = retrieval
         self.llm = llm
+        self.hybrid_retrieval = hybrid_retrieval
+        self.reranker = reranker
 
     async def query(
         self, user_id: uuid.UUID, cmd: QueryRequest
@@ -42,11 +47,27 @@ class RagService:
                 entity="KnowledgeBase", entity_id=str(kb_id)
             )
 
-        chunks = await self.retrieval.retrieve(
-            collection=kb.vector_collection,
-            query=cmd.question,
-            top_k=cmd.top_k,
-        )
+        use_hybrid = cmd.hybrid_search and self.hybrid_retrieval is not None
+        use_rerank = cmd.rerank_enabled and self.reranker is not None
+
+        fetch_k = max(cmd.top_k * 2, 10) if use_rerank else cmd.top_k
+
+        if use_hybrid:
+            chunks = await self.hybrid_retrieval.retrieve(
+                collection=kb.vector_collection,
+                kb_id=cmd.knowledge_base_id,
+                query=cmd.question,
+                top_k=fetch_k,
+            )
+        else:
+            chunks = await self.retrieval.retrieve(
+                collection=kb.vector_collection,
+                query=cmd.question,
+                top_k=fetch_k,
+            )
+
+        if use_rerank and chunks:
+            chunks = await self.reranker.rerank(cmd.question, chunks, cmd.top_k)
 
         if not chunks:
             query_id = uuid.uuid4()

@@ -43,3 +43,6 @@ pg_data/
 # OS
 .DS_Store
 Thumbs.db
+
+# Celery
+celerybeat-schedule

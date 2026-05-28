@@ -6,6 +6,7 @@ from fastapi import APIRouter, Depends, Request
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.api.deps import get_current_user
+from app.application.services.hybrid_retrieval_service import HybridRetrievalService
 from app.application.services.knowledge_base_service import KnowledgeBaseService
 from app.application.services.rag_service import RagService
 from app.application.services.retrieval_service import RetrievalService
@@ -13,6 +14,7 @@ from app.infrastructure.db.models import User
 from app.infrastructure.db.session import get_session
 from app.infrastructure.providers.embedding.bge_provider import BgeEmbeddingProvider
 from app.infrastructure.providers.llm.mimo_provider import MimoLlmProvider
+from app.infrastructure.providers.reranker.bge_reranker import BgeRerankerProvider
 from app.infrastructure.vector_store.chroma_store import ChromaVectorStore
 from app.core.config import settings
 from app.schemas.common import ApiResponse
@@ -26,8 +28,17 @@ def _build_rag_service(session: AsyncSession) -> RagService:
     embedder = BgeEmbeddingProvider()
     vector_store = ChromaVectorStore(settings.chroma_host, settings.chroma_port)
     retrieval = RetrievalService(embedder, vector_store)
+    hybrid_retrieval = HybridRetrievalService(session, retrieval, vector_store)
+    reranker = BgeRerankerProvider()
     llm = MimoLlmProvider()
-    return RagService(session, kb_service, retrieval, llm)
+    return RagService(
+        session,
+        kb_service,
+        retrieval,
+        llm,
+        hybrid_retrieval=hybrid_retrieval,
+        reranker=reranker,
+    )
 
 
 @router.post("", response_model=ApiResponse[QueryResponse])
