@@ -47,7 +47,6 @@ def upgrade() -> None:
     sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.ForeignKeyConstraint(['owner_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id'),
-    sa.UniqueConstraint('vector_collection'),
     sa.UniqueConstraint('vector_collection')
     )
     op.create_table('documents',
@@ -111,7 +110,6 @@ def upgrade() -> None:
     sa.ForeignKeyConstraint(['knowledge_base_id'], ['knowledge_bases.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('document_id', 'chunk_index'),
-    sa.UniqueConstraint('vector_id'),
     sa.UniqueConstraint('vector_id')
     )
     op.create_table('indexing_jobs',
