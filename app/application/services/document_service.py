@@ -13,6 +13,7 @@ from app.domain.errors import (
 from app.infrastructure.db.models import Document, DocumentStatus
 from app.infrastructure.db.repository import DocumentRepository
 from app.infrastructure.storage.base import ObjectStorage
+from app.schemas.common import PaginatedData, PaginationParams
 from app.schemas.document import DocumentResponse, DocumentUploadResponse
 
 ALLOWED_TYPES = {
@@ -93,6 +94,20 @@ class DocumentService:
             document_id=str(doc.id),
             status=doc.status.value,
             duplicate=False,
+        )
+
+    async def list_by_kb(
+        self, kb_id: uuid.UUID, pagination: PaginationParams
+    ) -> PaginatedData[DocumentResponse]:
+        offset = (pagination.page - 1) * pagination.page_size
+        docs, total = await self.repo.list_by_kb(
+            kb_id, offset=offset, limit=pagination.page_size
+        )
+        return PaginatedData[DocumentResponse](
+            items=[self._to_response(doc) for doc in docs],
+            total=total,
+            page=pagination.page,
+            page_size=pagination.page_size,
         )
 
     async def get_by_id(self, document_id: uuid.UUID) -> DocumentResponse:

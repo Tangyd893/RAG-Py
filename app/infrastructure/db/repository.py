@@ -81,3 +81,23 @@ class DocumentRepository(BaseRepository[Document]):
         )
         result = await self.session.execute(q)
         return result.scalar_one_or_none()
+
+    async def list_by_kb(
+        self, kb_id: UUID, offset: int = 0, limit: int = 20
+    ) -> tuple[list[Document], int]:
+        count_q = (
+            select(func.count())
+            .select_from(Document)
+            .where(Document.knowledge_base_id == kb_id)
+        )
+        total = (await self.session.execute(count_q)).scalar_one()
+
+        q = (
+            select(Document)
+            .where(Document.knowledge_base_id == kb_id)
+            .order_by(Document.created_at.desc())
+            .offset(offset)
+            .limit(limit)
+        )
+        result = await self.session.execute(q)
+        return list(result.scalars().all()), total
