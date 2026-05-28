@@ -38,3 +38,36 @@
 ### Next Steps
 
 - None - task complete
+
+
+## Session 2: P0-2 知识库与文档上传API实现
+
+**Date**: 2026-05-28
+**Task**: P0-2 知识库与文档上传API实现
+**Branch**: `master`
+
+### Summary
+
+实现KB CRUD、文档上传/去重/校验、统一错误响应、开发鉴权、Schemas层、对象存储抽象
+
+### Main Changes
+
+(Add details)
+
+### Git Commits
+
+| Hash | Message |
+|------|---------|
+| `c0a3f20` | (see git log) |
+
+### Testing
+
+- [OK] (Add test results)
+
+### Status
+
+[OK] **Completed**
+
+### Next Steps
+
+- None - task complete
