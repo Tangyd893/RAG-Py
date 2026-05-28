@@ -19,13 +19,22 @@ Use these terms consistently in code, docs, PRs, and AI prompts.
 - **Retrieval**: Search vector index by query embedding (with optional filters/rerank).
 - **Generation**: LLM synthesis from retrieved context (MiMo by default, config-driven).
 - **Indexing Job**: Async worker task that builds/rebuilds vectors for a document.
+- **IngestionService**: Orchestrates the full indexing pipeline (parse→chunk→embed→persist→finalize) with phased status updates and idempotent retry.
+- **TextSplitter**: Hierarchical text chunker (paragraph→sentence→character window) with configurable chunk_size and chunk_overlap.
+- **RetrievalService**: Generates query embedding via BGE and searches Chroma for top-k relevant chunks.
+- **PromptBuilder**: Constructs system prompt + context blocks from retrieved chunks with source numbering.
+- **ObjectStorage**: Abstract interface for file storage (local disk by default, MinIO/S3 compatible).
 
 ## Status Terms
 
-- **uploaded**: File accepted and stored.
-- **processing**: Parsing/splitting/embedding in progress.
+- **uploaded**: File accepted and stored (Document record created).
+- **parsing**: File content being extracted to text.
+- **chunking**: Text being split into chunks.
+- **embedding**: Chunks being vectorized by BGE.
 - **indexed**: Searchable and ready for query.
-- **failed**: Indexing failed; see error code and logs.
+- **failed**: Indexing failed at any stage; see error_code and error_message.
+- **deleting**: Document scheduled for async deletion.
+- **deleted**: Document and associated data removed.
 
 ## Design Rules
 

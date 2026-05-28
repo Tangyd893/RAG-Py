@@ -8,18 +8,18 @@ RAG-Py is a RAG backend + Web UI project with:
 - Docker Compose for middleware and local runtime
 - Next.js + Ant Design starter (selected Web UI approach)
 
-## Project Bootstrap (Current)
+## Project Status (Current)
 
-This repository is in bootstrap stage. Core config files are ready:
+P0 后端核心已实现：
 
-- `pyproject.toml`
-- `docker-compose.yml`
-- `Dockerfile`
-- `.env.example`
-- `.trellis/spec/*` conventions
-- `CONTEXT.md` glossary and shared language
-- `docs/开发交接与实现约定.md` handoff rules
-- `docs/开发实操指南（你来实现）.md` step-by-step implementation guide
+- ✅ **P0-1**: 数据库模型（7 表）+ Alembic 迁移
+- ✅ **P0-2**: 知识库 CRUD + 文档上传 API（含去重/鉴权/对象存储）
+- ✅ **P0-3**: 异步索引流水线（解析→分块→BGE→Chroma）
+- ✅ **P0-4**: RAG 查询链路（检索→Prompt→MiMo→持久化→来源引用）
+
+待完成：
+- ⬜ **P1**: Web UI 三条主流程（KB 列表、文档上传、问答页）
+- ⬜ 测试与可观测性补齐
 
 ## Quick Start
 
@@ -68,17 +68,47 @@ npm install antd @ant-design/icons @tanstack/react-query zustand zod axios
 - Keep all provider settings in config/env.
 - Keep PostgreSQL as metadata source of truth; vector data is rebuildable.
 
-## Repository Structure (Scaffold)
+## Repository Structure
 
 ```text
 RAG-Py/
-├── app/                    # backend scaffold
-├── web/                    # Next.js + Ant Design scaffold
-├── docs/                   # architecture and handoff docs
-├── .trellis/               # Trellis workflow/spec/task system
+├── app/
+│   ├── main.py                         # FastAPI 入口 + 中间件
+│   ├── api/
+│   │   ├── deps.py                      # 依赖注入（会话/鉴权/分页）
+│   │   ├── error_handlers.py            # 全局异常映射
+│   │   └── v1/routes/
+│   │       ├── health.py                # 健康检查
+│   │       ├── knowledge_bases.py       # 知识库 CRUD
+│   │       ├── documents.py             # 文档上传/查询
+│   │       └── queries.py               # RAG 查询
+│   ├── application/services/
+│   │   ├── knowledge_base_service.py    # 知识库用例
+│   │   ├── document_service.py          # 文档上传/去重
+│   │   ├── ingestion_service.py         # 索引流水线编排
+│   │   ├── rag_service.py               # RAG 查询编排
+│   │   ├── retrieval_service.py         # 向量检索
+│   │   └── prompt_builder.py            # Prompt 构建
+│   ├── domain/
+│   │   └── errors.py                    # 领域异常
+│   ├── infrastructure/
+│   │   ├── db/                          # SQLAlchemy + Alembic
+│   │   ├── storage/                     # 对象存储抽象 + 本地实现
+│   │   ├── parsing/                     # 文档解析器（TXT/MD）
+│   │   ├── text_splitter/               # 层级文本切分器
+│   │   ├── vector_store/                # 向量存储抽象 + Chroma
+│   │   └── providers/
+│   │       ├── embedding/               # BGE 向量化
+│   │       └── llm/                     # LLM 协议 + MiMo
+│   ├── tasks/
+│   │   ├── celery_app.py                # Celery 配置
+│   │   └── indexing.py                  # 异步索引任务
+│   ├── schemas/                         # Pydantic 请求/响应模型
+│   └── core/
+│       ├── config.py                    # 全局配置
+│       └── logging.py                   # 结构化日志
+├── web/                                 # Next.js + Ant Design 脚手架
+├── docs/                                # 架构文档
 ├── docker-compose.yml
-├── Dockerfile
-├── pyproject.toml
-├── .env.example
-└── CONTEXT.md
+└── pyproject.toml
 ```
