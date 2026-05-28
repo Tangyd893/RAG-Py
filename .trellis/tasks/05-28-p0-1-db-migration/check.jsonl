@@ -1,0 +1,6 @@
+{"file": ".trellis/spec/backend/database-guidelines.md", "reason": "检查命名约定、迁移要求、禁止模式是否遵守"}
+{"file": ".trellis/spec/backend/quality-guidelines.md", "reason": "检查代码质量、lint、类型标注"}
+{"file": ".trellis/spec/backend/directory-structure.md", "reason": "检查文件落点是否匹配约定"}
+{"file": ".trellis/spec/backend/error-handling.md", "reason": "检查错误处理模式"}
+{"file": "docs/RAG系统项目架构设计文档.md", "reason": "第4.3节表结构作为最终验收标准"}
+{"file": ".trellis/tasks/05-28-p0-1-db-migration/prd.md", "reason": "验收标准检查清单"}

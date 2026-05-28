@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# Virtual env
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env
+!.env.example
+
+# Data
+data/
+storage/
+chroma_data/
+
+# Node (web)
+web/node_modules/
+web/.next/
+web/out/
+
+# Docker
+pg_data/
+
+# Trellis runtime
+.trellis/.runtime/
+.trellis/.developer
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,6 @@
+{"file": ".trellis/spec/backend/database-guidelines.md", "reason": "ORM 模式、命名约定、迁移规范"}
+{"file": ".trellis/spec/backend/directory-structure.md", "reason": "文件落点与模块组织"}
+{"file": ".trellis/spec/backend/quality-guidelines.md", "reason": "代码质量标准和禁止模式"}
+{"file": ".trellis/spec/backend/logging-guidelines.md", "reason": "结构化日志规范"}
+{"file": "docs/RAG系统项目架构设计文档.md", "reason": "第4.3节定义完整表结构和索引"}
+{"file": ".trellis/tasks/05-28-p0-1-db-migration/design.md", "reason": "ORM 模型设计、迁移配置、会话管理方案"}
