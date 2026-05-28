@@ -10,16 +10,20 @@ RAG-Py is a RAG backend + Web UI project with:
 
 ## Project Status (Current)
 
-P0 后端核心已实现：
+P0 后端核心 + P1 Web UI 已实现：
 
 - ✅ **P0-1**: 数据库模型（7 表）+ Alembic 迁移
 - ✅ **P0-2**: 知识库 CRUD + 文档上传 API（含去重/鉴权/对象存储）
 - ✅ **P0-3**: 异步索引流水线（解析→分块→BGE→Chroma）
 - ✅ **P0-4**: RAG 查询链路（检索→Prompt→MiMo→持久化→来源引用）
+- ✅ **P1**: Web UI 三条主流程（知识库管理、文档上传、智能问答）
+- ✅ **P2**: 检索优化（BM25 混合检索 + RRF 融合 + BGE 重排 + 评测框架）
 
 待完成：
-- ⬜ **P1**: Web UI 三条主流程（KB 列表、文档上传、问答页）
 - ⬜ 测试与可观测性补齐
+- ⬜ MiMo/BGE 实际 API 调试验证（代码已就绪，待配置真实端点）
+- ⬜ PDF/DOCX 解析器
+- ⬜ 流式查询接口（SSE）
 
 ## Quick Start
 
