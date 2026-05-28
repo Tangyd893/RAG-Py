@@ -1,0 +1,13 @@
+{"file":".trellis/tasks/05-28-p0-4-query-rag/prd.md","reason":"P0-4 需求文档：查询API/检索/Prompt/LLM/持久化"}
+{"file":".trellis/tasks/05-28-p0-4-query-rag/design.md","reason":"P0-4 技术设计：RAGService 管线/RetrievalService/PromptBuilder/MiMo"}
+{"file":".trellis/tasks/05-28-p0-4-query-rag/implement.md","reason":"P0-4 实施计划：4 步依赖顺序"}
+{"file":".trellis/spec/backend/index.md","reason":"后端开发总体指引"}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"禁止模式、provider 抽象、错误码"}
+{"file":"docs/RAG系统项目架构设计文档.md","reason":"5.7-5.12 检索/Prompt/生成/RAGService 详细设计"}
+{"file":"app/infrastructure/vector_store/base.py","reason":"VectorStore.query 接口"}
+{"file":"app/infrastructure/vector_store/chroma_store.py","reason":"Chroma query 实现"}
+{"file":"app/infrastructure/providers/embedding/bge_provider.py","reason":"BGE embed_query 方法"}
+{"file":"app/infrastructure/providers/llm/mimo_provider.py","reason":"现有占位——需实现真实调用"}
+{"file":"app/application/services/rag_service.py","reason":"现有占位——需完整重写"}
+{"file":"app/infrastructure/db/models.py","reason":"QueryLog/QuerySource 模型结构"}
+{"file":"app/schemas/common.py","reason":"ApiResponse/PaginatedData 通用格式"}

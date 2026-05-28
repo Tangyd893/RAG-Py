@@ -1,0 +1,6 @@
+{"file":".trellis/tasks/05-28-p0-4-query-rag/prd.md","reason":"验收标准：检索结果/Prompt约束/持久化/sources完整性"}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"禁止模式检查、错误码、Promp注入防护"}
+{"file":".trellis/spec/backend/error-handling.md","reason":"LLM超时/限流错误码、空结果处理"}
+{"file":"docs/RAG系统项目架构设计文档.md","reason":"对照 6.5 验证 /queries 接口契约"}
+{"file":"app/infrastructure/db/models.py","reason":"验证 QueryLog/QuerySource 字段正确写入"}
+{"file":"app/application/services/rag_service.py","reason":"验证流程完整性：检索→Prompt→生成→持久化"}
