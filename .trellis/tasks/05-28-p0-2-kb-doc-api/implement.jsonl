@@ -1,0 +1,15 @@
+{"file":".trellis/tasks/05-28-p0-2-kb-doc-api/prd.md","reason":"P0-2 需求文档：验收标准与文件落点"}
+{"file":".trellis/tasks/05-28-p0-2-kb-doc-api/design.md","reason":"P0-2 技术设计：Schema/Service/Route/Storage/Auth 详细设计"}
+{"file":".trellis/tasks/05-28-p0-2-kb-doc-api/implement.md","reason":"P0-2 实施计划：6 步依赖顺序检查清单"}
+{"file":".trellis/spec/backend/index.md","reason":"后端开发总体指引"}
+{"file":".trellis/spec/backend/directory-structure.md","reason":"目录组织与文件命名约定"}
+{"file":".trellis/spec/backend/error-handling.md","reason":"错误类型、状态码映射、统一响应格式"}
+{"file":".trellis/spec/backend/database-guidelines.md","reason":"ORM 命名约定、Repository 模式、迁移规范"}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"禁止模式（业务逻辑不入路由）、依赖注入、错误码要求"}
+{"file":"docs/RAG系统项目架构设计文档.md","reason":"API 契约（6.3 KB/6.4 Doc 接口）、统一响应格式、请求 ID"}
+{"file":"app/infrastructure/db/models.py","reason":"已有 ORM 模型——新增 service 和 route 必须引用的实体定义"}
+{"file":"app/infrastructure/db/base.py","reason":"Base + TimestampMixin + new_uuid 工具函数"}
+{"file":"app/infrastructure/db/session.py","reason":"AsyncSession 工厂和 get_session 依赖（deps.py 将引用）"}
+{"file":"app/infrastructure/db/repository.py","reason":"BaseRepository——新增 KnowledgeBaseRepository/DocumentRepository 的基类"}
+{"file":"app/domain/errors.py","reason":"已有领域异常——需要扩展 ResourceConflictError"}
+{"file":"app/core/config.py","reason":"Settings 类——添加 dev_auth_token 字段、读取存储路径"}

@@ -47,5 +47,8 @@ class Settings(BaseSettings):
     storage_provider: str = "local"
     local_storage_path: str = "./data/files"
 
+    # 鉴权（开发模式）
+    dev_auth_token: str = ""
+
 
 settings = Settings()

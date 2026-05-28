@@ -1,0 +1,7 @@
+{"file":".trellis/tasks/05-28-p0-2-kb-doc-api/prd.md","reason":"验收标准：对照检查所有端点、错误码、去重逻辑"}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"代码审查清单：API错误契约、config-only secrets、结构化日志"}
+{"file":".trellis/spec/backend/error-handling.md","reason":"验证错误响应格式、状态码映射、领域异常正确抛出"}
+{"file":".trellis/spec/backend/database-guidelines.md","reason":"验证 Repository 模式、避免原始 SQL、外键一致性"}
+{"file":".trellis/spec/backend/directory-structure.md","reason":"验证文件落点符合目录约定"}
+{"file":"docs/RAG系统项目架构设计文档.md","reason":"对照 API 契约检查接口签名、响应格式、错误码列表"}
+{"file":"app/domain/errors.py","reason":"验证 ResourceConflictError 与其映射的状态码一致"}
