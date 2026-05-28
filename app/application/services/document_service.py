@@ -6,9 +6,7 @@ import uuid
 from fastapi import UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.config import settings
 from app.domain.errors import (
-    ResourceConflictError,
     ResourceNotFoundError,
     ValidationFailedError,
 )
@@ -83,6 +81,13 @@ class DocumentService:
         )
         self.session.add(doc)
         await self.session.flush()
+
+        try:
+            from app.tasks.indexing import index_document
+
+            index_document.delay(str(doc.id))
+        except Exception:
+            pass
 
         return DocumentUploadResponse(
             document_id=str(doc.id),

@@ -40,6 +40,20 @@ class KnowledgeBaseService:
         )
         self.session.add(kb)
         await self.session.flush()
+
+        try:
+            from app.core.config import settings
+            from app.infrastructure.vector_store.chroma_store import ChromaVectorStore
+            from app.infrastructure.providers.embedding.bge_provider import (
+                BgeEmbeddingProvider,
+            )
+
+            embedder = BgeEmbeddingProvider()
+            vector_store = ChromaVectorStore(settings.chroma_host, settings.chroma_port)
+            await vector_store.ensure_collection(collection, embedder.dimensions)
+        except Exception:
+            pass
+
         return kb
 
     async def list_by_user(

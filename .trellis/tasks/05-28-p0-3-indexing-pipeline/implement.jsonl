@@ -1,0 +1,16 @@
+{"file":".trellis/tasks/05-28-p0-3-indexing-pipeline/prd.md","reason":"P0-3 需求文档：索引流水线、解析器、切分器、向量化"}
+{"file":".trellis/tasks/05-28-p0-3-indexing-pipeline/design.md","reason":"P0-3 技术设计：Celery 任务、IngestionService、BGE、Chroma"}
+{"file":".trellis/tasks/05-28-p0-3-indexing-pipeline/implement.md","reason":"P0-3 实施计划：6 步依赖顺序清单"}
+{"file":".trellis/spec/backend/index.md","reason":"后端开发总体指引"}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"禁止模式、依赖注入、provider 抽象"}
+{"file":".trellis/spec/backend/error-handling.md","reason":"错误码规范、重试策略"}
+{"file":".trellis/spec/backend/database-guidelines.md","reason":"ORM 模式、幂等写入"}
+{"file":"docs/RAG系统项目架构设计文档.md","reason":"5.4 IngestionService、5.5 TextSplitter、5.6 EmbeddingService 详细设计"}
+{"file":"app/infrastructure/db/models.py","reason":"Document/Chunk/IndexingJob 模型结构"}
+{"file":"app/infrastructure/db/session.py","reason":"AsyncSession 工厂"}
+{"file":"app/infrastructure/db/repository.py","reason":"BaseRepository 基类"}
+{"file":"app/infrastructure/providers/embedding/bge_provider.py","reason":"现有 BGE 占位——需要实现真实调用"}
+{"file":"app/tasks/celery_app.py","reason":"现有 Celery app 占位——需要读取 config"}
+{"file":"app/infrastructure/storage/base.py","reason":"ObjectStorage 协议——索引读取文件"}
+{"file":"app/application/services/document_service.py","reason":"DocumentService——上传后触发索引"}
+{"file":"app/application/services/knowledge_base_service.py","reason":"KB Service——创建时初始化 Chroma collection"}

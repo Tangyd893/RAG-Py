@@ -1,0 +1,7 @@
+{"file":".trellis/tasks/05-28-p0-3-indexing-pipeline/prd.md","reason":"验收标准：状态流转、幂等重试、Chroma 数据可见"}
+{"file":".trellis/spec/backend/quality-guidelines.md","reason":"禁止模式检查：provider 调用不泄漏到 domain"}
+{"file":".trellis/spec/backend/error-handling.md","reason":"错误码映射、重试策略、job 状态更新"}
+{"file":".trellis/spec/backend/database-guidelines.md","reason":"幂等写入检查、事务边界"}
+{"file":"docs/RAG系统项目架构设计文档.md","reason":"对照 5.4-5.6 验证流水线设计完整性"}
+{"file":"app/infrastructure/db/models.py","reason":"验证 DocumentStatus 状态机正确流转"}
+{"file":"app/application/services/ingestion_service.py","reason":"验证分阶段状态更新和异常处理"}
